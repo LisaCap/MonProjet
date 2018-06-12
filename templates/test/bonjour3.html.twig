@@ -1,0 +1,63 @@
+{# templates/test/bonjour3.html.twig #}
+
+{# herite du template principal. Il va le chercher à la racine templates. Si on voulait faire un extends placé dans un dossier, il faudrait ecrire "mon dossier/base.html.twig" #}
+{% extends 'base.html.twig' %}
+
+
+{# ecriture dans le bloc title #}
+        {% block title %}
+            {{ title }}
+        {% endblock %}
+       
+{% block stylesheets %}{% endblock %}
+
+{# ecriture dans le bloc body #}
+    {% block body %}
+        <h1>Bonjour {{ prenom }} {{ nom|upper }}</h1>
+        <p> Un paragraphe lorem ipsum</p>
+        
+        <h2>Boucle simple</h2>
+        {# boucle sur le tableau a1 #}
+            <ul class="nav justify-content-center">
+                {% for nombre in a1 %}
+                    <li class="nav-item"><a class="nav-link" href="#">{{ nombre }}</a></li>
+                {% endfor %}
+            </ul>
+            
+        <h2>Boucle sur tableau associatif</h2>
+        {# boucle sur le tableau a2 #}
+            <ol>
+                {% for produit in a2 %} {# produit renvoi à "ligne en cours", notre curseur#}
+                    <li>{{ produit.nom }}: {{ produit.prix }} &euro;</li>
+                        {% else %}
+                        {# on rentrera dans le else si le tableau a2 est vide #}
+                            <div class ="alert alert-danger">Aucuns produits en stock...</div>
+                {% endfor %}
+            </ol>
+            
+        <h2>Comparaison</h2>
+            {% if a2 is empty %}
+                <div class ="alert alert-danger">$a2 est vide...</div>
+                
+                {% else %}
+                    <div class ="alert alert-success">$a2 est OK !</div>
+            {% endif %}
+            
+            {# pour if/elseif/else 
+                {% if kenny.sick %}
+                    Kenny is sick.
+                        {% elseif kenny.dead %}
+                            You killes Kenny !
+                        {% else %}
+                            Kenny looks okay --- so far
+                {% endif %}
+            #}
+        
+        
+        {# lien vers la route nommée index #}
+            <a href="{{ url('index') }}">Accueil</a>
+        {# lien vers la route nommée bonjour #}
+            <a href="{{ url('bonjour', {'nom': 'TwigNom', 'prenom': 'TwigPrenom'})  }}">Bonjour</a>
+    {% endblock %} {#fin du block body#}
+
+{% block javascripts %}{% endblock %}

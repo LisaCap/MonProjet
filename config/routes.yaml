@@ -1,0 +1,24 @@
+#ici on est dans le fichier route pour toutes mes pages
+
+
+# le nom de la page (ici index, qu'on retrouve dans TestController.php). La page est généré à ce moment la
+# path : / renvoi à la racine du site, donc si on écrit "http://localhost/MonProjet/public/"
+index:
+    path: /
+    controller: App\Controller\TestController::accueil
+# on appel la methode accueil() present dans mon TestController.
+# Attention! Bien écrire mes Controller en UCFIRST et CamelCase.
+# ex testController.php ne marchera pas. Il faut ecrire TestController.php
+
+bonjour: 
+    path: /bonjour/{nom}/{prenom}
+    #on demande un parametre qu'on recuperera par l'url. donc un $nom et un $prenom. On est forcement ici en GET avec cette synthaxe
+    controller: App\Controller\TestController::bonjour
+    # ici on appel la fonction bonjour()
+    # et on tapera dans le navigateur http://localhost/MonProjet/public/bonjour/Capelle/Lisa
+    #et il recupere via le get les infos dont on a besoin
+    defaults:
+        nom: 'Nimous'
+        prenom: 'Ano'
+    #ici on rentre par default des parametres, pour eviter des erreurs, au cas ou il y a un oubli
+    

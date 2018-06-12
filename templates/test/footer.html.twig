@@ -1,0 +1,19 @@
+{# le fichier ici est appelé par le base.html.twig , en passant par un controleur (TestController, via la methode footer() )#}
+         {% block stylesheets %}{% endblock %}
+          
+           
+
+       <div class="col-sm-12">
+
+        {# si dte existe #}
+           {% if dte %}
+
+              <p class="text-center">Copyright &copy; Moi</p>
+              <p class="text-center">Nous sommes le {{ dte }}</p>
+
+           {% endif %}
+
+       </div>
+
+
+{% block javascripts %}{% endblock %}

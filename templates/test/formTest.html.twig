@@ -1,0 +1,62 @@
+{# formTest.html.twig#}
+{# on appelle ce fichier via notre TestController.php#}
+
+
+{% extends 'base.html.twig' %}
+{# il retoutre le fichier même si on est pas dans le même dossier, il remonte au dossier parent. Par contre si il etait dans un autre sous dossier, il faudrait le repreciser#}
+
+{% block title %} Mon Premier formulaire {% endblock %}
+
+{% block body %}
+    
+
+<div class="row">
+   <div class="col-sm-3"></div>
+   <div class= "col-sm-6">
+      
+       <fieldset>
+           <legend>Formulaire Bootstrap avec Symfony</legend>
+            
+                {{ form_start(form) }}
+                {# form_start c'est comme une ouverture de balise form #}
+
+                {# {{ form_widget(form) }}  le basic de symfony#}
+
+                {#formulaire bootstrap#}
+
+                <div class="form-group">
+
+                    {{ form_row(form.nom, {attr: {class: "form-control"} }) }}
+
+                </div>
+
+                <div class="form-group">
+
+                    {{ form_row(form.prenom, {attr: {class: "form-control"} }) }}
+
+                </div>
+
+                <div class="form-group">
+
+                    {{ form_row(form.age, {attr: {class: "form-control"} }) }}
+
+                </div>
+                
+                <div class="form-group text-center">
+                     {{ form_end(form) }}
+                    {# form_end c'est comme une fermeture de balise form #}
+                    {# form a été defini dans notre controller, via la fonction formTest où on a créer la variable $form #}
+               </div>
+
+           
+        </fieldset>
+       
+   </div>
+    
+</div>
+        
+       
+
+{% endblock %}
+
+

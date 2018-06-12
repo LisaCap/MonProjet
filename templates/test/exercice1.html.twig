@@ -1,0 +1,49 @@
+{# templates/test/exercice1.html.twig #}
+
+{# herite du template principal. Il va le chercher à la racine templates. Si on voulait faire un extends placé dans un dossier, il faudrait ecrire "mon dossier/base.html.twig" #}
+{% extends 'base.html.twig' %}
+
+
+{# ecriture dans le bloc title #}
+        {% block title %}
+            {{ title }}
+        {% endblock %}
+       
+{% block stylesheets %}{% endblock %}
+
+{# ecriture dans le bloc body #}
+    {% block body %}
+        <h1> {{ title }} </h1>
+        
+        <h2>Nombre aleatoire et répétition</h2>
+        
+          
+            {# si tmp existe #}
+           {% if tmp %}
+              
+               {# boucle sur le tableau a1 #}
+               <ul class="nav justify-content-center">
+               
+                {% for ligne_en_cours in tmp %}
+                    <li class="nav-item"><a class="nav-link" href="#">{{ ligne_en_cours }}</a></li>
+                {% endfor %}
+                
+                </ul>
+                
+                {% else %}
+                    <div class="alert alert-danger">Attention le tableau $tmp est vide</div>
+            
+           {% endif %}
+           
+           <div class="row">
+               <div class="col-sm-3"></div>
+                   <div class="col-sm-6">
+                       <img class="img-fluid rounded" src="{{ asset('img/totoro.jpg')}}" alt="totoro">
+                   </div>
+           </div>
+            
+            
+        
+    {% endblock %} {#fin du block body#}
+
+{% block javascripts %}{% endblock %}

@@ -1,0 +1,39 @@
+{# proverbes.html.twig#}
+{# on appelle ce fichier via notre TestController.php#}
+
+
+{% extends 'base.html.twig' %}
+{# il retoutre le fichier même si on est pas dans le même dossier, il remonte au dossier parent. Par contre si il etait dans un autre sous dossier, il faudrait le repreciser#}
+
+{% block title %} Mon proverbe aléatoire {% endblock %}
+
+{% block body %}
+   
+
+
+<div class="row">
+ 
+    <div class= "col-sm-3">
+        <h1>Proverbe<br>Du<br>Jour</h1>
+        <p>Mon nombre généré avec mt_rand: {{ nombre }} </p>
+    </div>
+  
+    <div class="col-sm-6">
+       
+          {# affichage des messages flash#}
+            {% for proverbe in app.flashes('proverbe') %}
+                <div class="alert alert-success text-center">
+                    {{ proverbe }}
+                </div>
+            {% endfor %}
+   </div>
+   
+   
+    
+</div>
+        
+       
+
+{% endblock %}
+
+
