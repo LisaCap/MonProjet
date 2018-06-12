@@ -1,24 +1,46 @@
 security:
-    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
-    providers:
-        in_memory: { memory: ~ }
-    firewalls:
-        dev:
-            pattern: ^/(_(profiler|wdt)|css|images|js)/
-            security: false
-        main:
-            anonymous: true
+  # la partie qui permet d'encrypter le mot de passe 
+  encoders:
+    App\Entity\User:
+      algorithm: bcrypt
+      cost: 14
+  # hierarchie (qui a le droit)
+  # ROLE_ADMIN à les droits de user + les siens
+  # ROLE_SUPER_ADMIN à les droits de ROLE_ADMIN
+  # ROLE_ALLOWED_TO_SWITCH permet de changer de compte
+  # et de se faire passer pour quelqu'un d'autre. 
+  # le super admin pourra accéder à un autre compte 
+  # sans avoir son mot de passe (debug)
+  role_hierarchy:
+    ROLE_ADMIN: [ROLE_USER]
+    ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
-            # activate different ways to authenticate
+  # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+  providers:
+    main: 
+      entity:
+        class: App\Entity\User
+        # property: username
+  firewalls:
+    dev:
+      pattern: ^/(_(profiler|wdt)|css|images|js)/
+      security: false
+    main:
+      pattern: ^/
+      provider: main
+      anonymous: true
+      form_login:
+        login_path: login
+        check_path: login
+      remember_me:
+        secret: '%kernel.secret%'
+        lifetime: 604800 #une semaine en secondes
+        path: /
+      logout:
+        # la route vers la déconnexion
+        path: /logout
+        target: /          
 
-            # http_basic: true
-            # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
-
-            # form_login: true
-            # https://symfony.com/doc/current/security/form_login_setup.html
-
-    # Easy way to control access for large sections of your site
-    # Note: Only the *first* access control that matches will be used
-    access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+  access_control:
+    - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/admin, roles: ROLE_ADMIN }

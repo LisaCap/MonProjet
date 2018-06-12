@@ -21,4 +21,10 @@ bonjour:
         nom: 'Nimous'
         prenom: 'Ano'
     #ici on rentre par default des parametres, pour eviter des erreurs, au cas ou il y a un oubli
+login: 
+    path: /login
+    controller: App\Controller\SecurityController::login
     
+# page de deconnexion fictive (géré par symphony)
+logout: 
+    path: /logout
