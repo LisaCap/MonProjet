@@ -1,5 +1,6 @@
 security:
-  # la partie qui permet d'encrypter le mot de passe 
+  #la partie qui permet d'encrypter mon mot de passe
+  # Méthode d'encryptage : Blowfish, c'est ce qu'il y a de plus performant sur le marché en ce moment (bcrypt), AES, c'est l'autre cryptage tres bien qui crypte en 256 bit 
   encoders:
     App\Entity\User:
       algorithm: bcrypt
@@ -20,7 +21,7 @@ security:
     main: 
       entity:
         class: App\Entity\User
-        # property: username
+        # property: username (ça c'est celui par default, si dans notre champs de notre table "user", on ecrit le champ "name", dans ce cas il faudrait changer notre property, et changer "username" par "name")
   firewalls:
     dev:
       pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -39,7 +40,17 @@ security:
       logout:
         # la route vers la déconnexion
         path: /logout
-        target: /          
+        target: /
+        # activate different ways to authenticate
+
+            # http_basic: true
+            # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
+
+            # form_login: true
+            # https://symfony.com/doc/current/security/form_login_setup.html
+
+    # Easy way to control access for large sections of your site
+    # Note: Only the *first* access control that matches will be used
 
   access_control:
     - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }

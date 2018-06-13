@@ -127,12 +127,13 @@ class TestController extends Controller
                                    ));
     }
     
-    public function footer()
+    public function footer(Proverbes $proverbe)
     {
+        $message = $proverbe->getMsg();
         // faire apparaitre la date et l'heure
         $dte = date('d/m/Y H:i:s');
         //appel du template footer.html.twig
-        return $this->render('test/footer.html.twig', array('dte' => $dte));
+        return $this->render('test/footer.html.twig', array('dte' => $dte, 'message' => $message));
     }
     
     /**

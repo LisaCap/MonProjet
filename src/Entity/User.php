@@ -40,12 +40,22 @@ class User implements UserInterface, \Serializable
     public function __construct()
     {
     	$this->isActive = true;
-    	$this->roles[] = 'ROLE_ADMIN';
+    	$this->roles[] = 'ROLE_USER';
     }
     //récupération de l'adresse mail
     public function getEmail()
     {
     	return $this->email;
+    }
+    
+    public function getId()
+    {
+    	return $this->id;
+    }
+    
+    public function getIsActive()
+    {
+    	return $this->isActive;
     }
     //récupération du nom d'utilisateur
     public function getUsername()
@@ -130,6 +140,8 @@ class User implements UserInterface, \Serializable
     {
         return $this->isActive;
     }
+    
+
 
     /*
     * Ne pas oublier les commandes 
